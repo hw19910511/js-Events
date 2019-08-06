@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>js事件高级应用——自定义滚动条</title>
+	<style type="text/css"> 
+	#parent{width:600px;height:20px;background:#ccc;position:relative;margin:10px auto;}
+	#div1{width:20px;height:20px;background:red;position:absolute;left:0;top:0;}
+	/*#div2{ width:300px;height:300px;background:green; filter:alpha(opacity:0);opacity:0;}*/
+	#div3{ width:400px;height:300px;border:1px solid black;overflow:hidden;position:relative;}
+	#div4{ position:absolute;left:0;top:0;padding:4px;}
+	</style>
+	<script type="text/javascript"> 
+	  window.onload=function()
+	 {
+	    var oDiv=document.getElementById('div1');
+		var oDiv2=document.getElementById('div2');
+		var oDiv3=document.getElementById('div3');
+		var oDiv4=document.getElementById('div4');
+		var oParent=document.getElementById('parent');
+		
+		var disX=0;
+			
+		oDiv.onmousedown=function(ev)
+		{
+		   var oEvent=ev||event;
+		   disX=oEvent.clientX-oDiv.offsetLeft;
+		   		   
+		   document.onmousemove=function(ev)
+		   {
+		      var oEvent=ev||event;
+			  var l=oEvent.clientX-disX;
+			  
+			  if(l<0)
+			  {
+			    l=0;
+			  }
+			  else if(l>oParent.offsetWidth-oDiv.offsetWidth)
+			  {
+			     l=oParent.offsetWidth-oDiv.offsetWidth;
+				 
+			  }
+			 	  
+			  oDiv.style.left=l+'px';	
+			  
+			  var scale=l/(oParent.offsetWidth-oDiv.offsetWidth);
+			  
+              document.title=scale;		
+			  /*oDiv2.style.width=400*scale+'px';
+			  oDiv2.style.height=400*scale+'px';
+              oDiv2.style.filter='alpha(opacity:'+scale*100+')';	
+              oDiv2.style.opacity=scale;	*/
+
+               oDiv4.style.top=-scale*(oDiv4.offsetHeight-oDiv3.offsetHeight)+'px';			  
+		   };
+		   
+		   document.onmouseup=function()
+		   {
+		     document.onmousemove=null;
+			 document.onmouseup=null;			 			
+		   };
+		   return false;
+		};
+	 };
+	</script>
+</head>
+<body>
+	<div id="parent">
+	  <div id="div1"></div>
+	</div>
+	<div id="div2"></div>
+	<div id="div3">
+	  <div id="div4">
+	    据新华社电中航工业、国机集团等8家央企6日在京签约，在重要项目、科技转化等相关领域开展重组合作整合，这将成为央企间产业联合协作的新典范，也将开启央企间产业重组合作整合的新阶段。
+相关合作内容包括：中航工业和国机集团共同发展八万吨模锻压机项目；中航工业将房地产业务全部划转保利集团，中核建设和中国一重在高温气冷堆主设备制造领域合作，兵器工业、兵器装备、中国国新对北方公司进行股权重组。
+国务院国资委主任肖亚庆在6日参加中央企业产业合作座谈会上表示，下一步，国资委政策将加码推动央企产业重组步伐，通过业务整合、资产重组、股权合作、资产置换、无偿划转、协议转让、战略联盟、联合开发等多途径，加快央企间产业重组合作整合。
+肖亚庆同时清晰地勾勒出国企改革兼并重组“路线图”：通过产业重组，在突破关键技术、掌握核心资源，打造知名品牌等方面，实现产业重组合作“一加一大于二”的效果。肖亚庆同时透露，目前部分央企在牵头技术创新战略联盟、设立创新投资基金、构建创新孵化平台等方面，取得了重大突破。据统计，央企牵头国家及地方技术创新联盟141个，50多家中央企业共发起和参与基金179只，构建面向社会的创新孵化平台57个，创业创新平台27个。
+“此次集中签约，意味着央企重组的重心开始向资本、项目、产业板块等内部要素转移。”中国企业研究院首席研究员李锦说，未来，央企间产业重组合作整合将被更快地推进，央企内部的各种要素将被再次优化。
+	  </div>
+	</div>
+</body>
+</html>

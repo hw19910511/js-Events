@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>提交留言</title>
+	<script type="text/javascript"> 
+	window.onload=function()
+	{
+	   var oTxt1=document.getElementById('txt1');
+	   var oTxt2=document.getElementById('txt2');
+	   var oBtn=document.getElementById('btn1');
+	   
+	   oBtn.onclick=function()
+	   {
+	      oTxt2.value+=oTxt1.value+'\n';
+		  oTxt1.value='';
+	   };
+	   
+	   //回车键提交
+	   oTxt1.onkeydown=function(ev){
+	      var oEvent=ev||event;
+		  if(oEvent.keyCode==13)
+		  {
+		      oTxt2.value+=oTxt1.value+'\n';
+		      oTxt1.value='';
+		  };
+	   };
+	   
+	   //ctrl+回车键提交
+	   oTxt1.onkeydown=function(ev){
+	      var oEvent=ev||event;
+		  if(oEvent.keyCode==13&&oEvent.ctrlKey)
+		  {
+		      oTxt2.value+=oTxt1.value+'\n';
+		      oTxt1.value='';
+		  };
+	   };
+	};
+	</script>
+</head>
+<body>
+	<input type="text" name="txt1" id="txt1" />
+	<input id="btn1" type="button" value="发布" />
+	<textarea name="txt2" id="txt2" cols="30" rows="10"></textarea>
+</body>
+</html>

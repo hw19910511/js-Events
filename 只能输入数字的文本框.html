@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>js事件中级——只能输入数字的文本框</title>
+	<script type="text/javascript"> 
+	window.onload=function()
+	{
+	   var oTxt=document.getElementById('txt');
+	   oTxt.onkeydown=function(ev)
+	   {
+	       var oEvent=ev||event;
+		   if(oEvent.keyCode!=8&&(oEvent.keyCode<48||oEvent.keyCode>57)){
+		     return false;
+		   }       		   
+	   };
+	};
+	</script>
+</head>
+<body>
+	<input type="text" name="txt" id="txt" />
+</body>
+</html>
